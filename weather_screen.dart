@@ -1,11 +1,10 @@
-
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_application_2/secret.dart';
-import 'package:http/http.dart' as http;
 import 'dart:ui';
-
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_application_2/additionalpage.dart';
+import 'package:flutter_application_2/weather_forecaitem.dart';
+import 'package:http/http.dart' as http;
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -17,16 +16,13 @@ class WeatherScreen extends StatefulWidget {
 class _WeatherScreenState extends State<WeatherScreen> {
   late Future<Map<String, dynamic>> weather;
   
-  var DateFormat;
-  
-  var ImageFilter;
 
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
-      String cityName = 'London';
+      String cityName = 'mumbai';
       final res = await http.get(
         Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?q=$cityName,uk&APPID=$openWeatherAPIKey',
+          'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=367d6161ce635cc64061c11db0a9fc49',
         ),
       );
 
@@ -215,10 +211,5 @@ class _WeatherScreenState extends State<WeatherScreen> {
       ),
     );
   }
-  
-  AdditionalInfoItem({required IconData icon, required String label, required String value}) {}
 }
 
-Widget HourlyForecastItem({required time, required String temperature, required IconData icon}) {
-  return HourlyForecastItem(time: time, temperature: temperature, icon: icon);
-}
